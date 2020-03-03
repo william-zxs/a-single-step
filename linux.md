@@ -1,8 +1,6 @@
 # linux&shell
 
-
-
-### expect
+##expect
 
 用于脚本登陆服务器并执行命令。
 
@@ -19,9 +17,66 @@ send "exit\r"
 expect eof
 ```
 
-### EOF
+---
+
+##EOF
 
 ```
 todo
 ```
+
+---
+
+##SSH
+
+###ssh-copy-id user@host
+
+将本机公钥传到服务器
+
+-i 选项可以指定公钥文件
+
+###.ssh config
+
+**配置快速登陆以及代理登陆**
+
+```shell
+
+Host name1
+    HostName 19.38.112.123
+    Port 22
+    User worker
+
+Host name2
+    HostName 124.222.226.220
+    Port 36408
+    User crs 
+    ProxyCommand ssh user@name1 -W %h:%p
+    
+
+ssh name2
+```
+
+---
+
+##rsync
+
+**rsync 指定端口推送**
+
+```
+rsync -av -e 'ssh -p 36408' $bdir crs@114.242.206.180:~/aliyun/
+```
+
+**rsync指定代理推送**
+
+```
+rsync -vrtopz --progress -e ' ssh -ax -c blowfish ' xx@ip1:/data/  /data1/
+```
+
+
+
+
+
+
+
+
 

@@ -18,5 +18,5 @@ todo
 
 ---
 
-### git log --graph
+### git log --graph --oneline -20
 
