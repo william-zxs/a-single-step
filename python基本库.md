@@ -8,6 +8,26 @@
 
 @classmethod
 
+```
+e.g.
+class Dog(object):
+		def __init__(self,name):
+				self.name = name
+		@classmethod
+		def color():
+				return 'yellow'
+		@staticmethod
+		def age():
+				return 5
+
+```
+
+---
+
+
+
+
+
 
 
 ```
