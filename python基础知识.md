@@ -1,5 +1,7 @@
 # python基础知识
 
+##深拷贝和浅拷贝
+
 函数内部也可以改变全局变量
 
 ```
@@ -14,11 +16,29 @@ demo(data)
 
 ```
 
-###深拷贝和浅拷贝
+
 
 ```
 todo
 ```
+
+---
+
+## python shell
+
+PYTHONSTARTUP 环境变量
+
+```shell
+#!/bin/bash
+export PYTHONSTARTUP=startup.py
+python
+```
+
+```
+PYTHONSTARTUP is an environment variable you will define specifying the location of the path to a python file
+```
+
+<PYTHONSTARTUP is an environment variable you will define specifying the location of the path to a python file>
 
 
 
