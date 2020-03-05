@@ -1,5 +1,13 @@
 #mongoDB
 
+## 安装
+
+```
+http://www.cnblogs.com/kevingrace/p/5752382.html
+```
+
+
+
 ##副本集
 
 ```
@@ -29,6 +37,29 @@ mongoDB目前已不推荐使用主从模式，取而代之的是副本集模式�
 ```
 
 MongoDB的副本集 是自带故障转移功能的主从复制
+
+
+
+### 配置副本集
+
+```
+https://cloud.tencent.com/developer/article/1026185
+```
+
+
+
+```javascript
+MongoDB 安装目录:/usr/local/mongodb
+MongoDB 数据库目录:/usr/local/mongodb/data
+MongoDB 日志目录:/usr/local/mongodb/log/mongo.log 
+MongoDB 配置文件:/usr/local/mongodb/mongodb.conf
+```
+
+
+
+
+
+
 
 ---
 
