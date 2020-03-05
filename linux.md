@@ -72,11 +72,45 @@ rsync -av -e 'ssh -p 36408' $bdir crs@114.242.206.180:~/aliyun/
 rsync -vrtopz --progress -e ' ssh -ax -c blowfish ' xx@ip1:/data/  /data1/
 ```
 
+---
+
+##tar
+
+```
+todo
+```
+
+---
+
+##nohup  2>1&
+
+```
+todo
+```
+
+---
+
+##systemctl
+
+```
+查看防火墙状态
+systemctl status firewalld
+
+设置开机自动启动（本质上是创建了链接）
+systemctl enable mariadb
+Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
 
 
 
+查看开机项
+syatemctl list-unit-files |grep  mysql
+```
 
+---
 
+##Selinux
 
-
+```
+/etc/sysconfig/selinux
+```
 

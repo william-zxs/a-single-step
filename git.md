@@ -12,7 +12,7 @@
 todo
 ```
 
-
+git pull 默认策略是merge
 
 
 
