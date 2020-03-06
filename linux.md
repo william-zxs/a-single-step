@@ -22,7 +22,26 @@ expect eof
 ##EOF
 
 ```
-todo
+
+[worker@iZ8vb1umb9zfnw5rvg4577Z data_to_docker]$ cat restore_to_docker.sh 
+#!/bin/sh
+
+db=community
+pass=abcd1234
+host=172.26.99.100
+sqlport=8306
+mongoport=47017
+
+mysqladmin -u root -p"${pass}" -h $host -P $sqlport drop $db
+mysql -u root -p"${pass}" -h $host -P $sqlport < $1
+
+mongo  $host:$mongoport <<EOF
+use $db;
+db.dropDatabase();
+exit;
+EOF
+
+mongorestore -h $host:$mongoport -d $db $2
 ```
 
 ---
@@ -113,4 +132,42 @@ syatemctl list-unit-files |grep  mysql
 ```
 /etc/sysconfig/selinux
 ```
+
+
+
+##备份(及恢复)mysql、mongo
+
+###备份
+
+```
+#/bin/sh
+
+mysqldump -p'lott-jh-abcd1234' --data community > community_`date +%m%d%H%M`.sql
+mongodump  -d community -o mongo_community_`date +%m%d%H%M`
+```
+
+### 恢复
+
+```
+#!/bin/sh
+
+db=community
+pass=abcd1234
+host=172.26.99.100
+sqlport=8306
+mongoport=47017
+
+mysqladmin -u root -p"${pass}" -h $host -P $sqlport drop $db
+mysql -u root -p"${pass}" -h $host -P $sqlport < $1
+
+mongo  $host:$mongoport <<EOF
+use $db;
+db.dropDatabase();
+exit;
+EOF
+
+mongorestore -h $host:$mongoport -d $db $2
+```
+
+
 
