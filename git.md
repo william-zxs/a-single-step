@@ -1,5 +1,11 @@
 # git操作指北
 
+##工作区，暂存区，本地仓库，远程仓库
+
+git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交(committed)
+
+
+
 ##git merge & git rebase
 
 **git rebase** 提交记录会是一条直线，每个人的提交不会按时间排序分散开来，比较容易查看log，排除bug
