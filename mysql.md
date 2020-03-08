@@ -26,3 +26,36 @@ todo
 ##LOCK
 
 UNLOCK TABLES还还以用来释放FLUSH TABLES WITH READ LOCKS
+
+## 同步
+
+异步复制   全同步复制   半同步复制
+
+## 锁
+
+乐观锁和悲观锁
+
+
+
+## 遇到的问题
+
+### 数据库连接错误
+
+```
+show global variables like ‘wait_timeout’;
+| Variable_name | Value |
++---------------+-------+
+| wait_timeout  | 28800 |
+
+
+Flask-SQLALchemy
+SQLALCHEMY_POOL_RECYCLE
+
+mysql的默认超时时间是8小时
+Flask-SQLALchemy的默认超时时间是2小时
+
+
+
+
+```
+

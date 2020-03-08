@@ -13,3 +13,10 @@ docker network ls
 
 ```
 
+如何组建局域网？ todo
+
+
+
+##docker cp
+
+docker cp  ./my.cnf  containerId:/etc/mysql/my.cnf
