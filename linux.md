@@ -1,4 +1,4 @@
-# linux&shell
+# linux
 
 ##expect
 
@@ -125,6 +125,51 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service
 syatemctl list-unit-files |grep  mysql
 ```
 
+**利用systemctl命令管理**
+
+```
+利用systemctl命令管理
+显示服务状态：systemctl status docker.service
+列出服务层级和依赖关系：systemctl list-dependencies docker.service
+
+启动服务：systemctl start docker.service
+关闭服务：systemctl stop docker.service
+重启服务：systemctl restart docker.service
+
+设置服务自启动：systemctl enable docker.service
+禁止服务自启动：systemctl disable docker.service
+
+查看服务是否自启动：systemctl is-enabled docker.service
+列出系统所有服务的启动情况：systemctl list-units --type=service
+列出所有自启动服务：systemctl list-unit-files|grep enabled
+
+
+```
+
+**对应的旧指令（chkconfig、service）**
+
+```
+对应的旧指令（chkconfig、service）
+显示服务状态：service docker status
+列出服务层级和依赖关系：systemctl list-dependencies docker.service
+
+启动服务：service docker start
+关闭服务：service docker stop
+重启服务：service docker restart
+
+设置服务自启动：chkconfig --level 3 docker on
+禁止服务自启动：chkconfig --level 3 docker off
+
+查看服务是否自启动：chkconfig --list docker
+列出系统所有服务的启动情况：chkconfig --list
+```
+
+
+
+
+
+
+
 ---
 
 ##Selinux
@@ -181,4 +226,28 @@ linux 中的ip  mac 映射
 ## crontab
 
 定时任务
+
+## awk &  xargs
+
+ps -ef | grep zabbix_server | awk '{print $2}' | xargs kill -9 
+
+
+
+## netstat
+
+```
+-a : 显示所有socket
+-t : 指明显示TCP端口
+-u : 指明显示UDP端口
+-l : 仅显示监听套接字(所谓套接字就是使应用程序能够读写与收发通讯协议(protocol)与资料的程序)
+-p : 显示进程标识符和程序名称，每一个套接字/端口都属于一个程序。
+-n : 不进行DNS轮询，显示IP(可以加速操作)
+
+查看程序/进程 的端口使用情况
+netstat -nlp | grep rsync
+netstat -nlp | grep 22010(pid)
+
+查看端口使用情况
+netstat -an | grep 3306 (port)
+```
 
