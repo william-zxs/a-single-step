@@ -1,4 +1,4 @@
-# linux
+#linux
 
 ##expect
 
@@ -133,7 +133,7 @@ syatemctl list-unit-files |grep  mysql
 列出服务层级和依赖关系：systemctl list-dependencies docker.service
 
 启动服务：systemctl start docker.service
-关闭服务：systemctl stop docker.service
+关闭服务：systemctl stop docker.serviced
 重启服务：systemctl restart docker.service
 
 设置服务自启动：systemctl enable docker.service
@@ -262,4 +262,158 @@ userdel -r jack
 
 passwd jack
 ```
+
+
+
+## rpm
+
+安装一个包
+
+```
+rpm -ivh
+```
+
+升级一个包
+
+```
+rpm -Uvh
+```
+
+卸载一个包
+
+```
+rpm -e
+```
+
+查询一个包是否被安装
+
+```
+rpm -q  <name>
+rpm -qa | grep <name>  (列出所有被安装的rpm包)
+```
+
+得到被安装的包的信息
+
+```
+rpm -qi <name>
+```
+
+列出服务器上的一个库属于哪个rpm包
+
+```
+rpm -qf
+```
+
+## yum
+
+```
+yum install
+```
+
+列出所有可安装的软件
+
+```
+yum list
+```
+
+删除包
+
+```
+yum remove
+```
+
+查找软件包
+
+```
+当我们想用一些命令但是又想不起来这个命令属于哪个包时 可以使用这个命令 比如 查找killall属于哪个包
+yum search killall
+yum install +找到的包名
+```
+
+列出当前yum源
+
+```
+yum repolist
+```
+
+对于 Linux 软件安装时提示缺失库的，可以使用 yum 的 provides 参数查看 libstdc++.so.6 的库文件包含在那个安装包中只需要执行：
+
+```
+yum provides libstdc++.so.6
+```
+
+### 搭建自己的yum源
+
+createrepo
+
+### 挂载镜像作yum源
+
+1.mount 挂载镜像到指定目录
+
+2.repo 中baseurl指向该目录（e.g.   baseurl=file:///media/   ）
+
+## demsg
+
+ demsg命令用于显示开机信息，内核会将开机信息存储在系统缓冲区（ring buffer）中，开机后可用dmesg命令查看，也可以在/var/log/目录中查看dmesg文件
+
+## journalctl
+
+日志管理工具journalctl是centos7上专有的日志管理工具，该工具是从message这个文件里读取信息。
+
+## gcc、Make、CMake
+
+gcc 是GNU编译器套件，是Linux下默认的C/C++编译器.
+
+CMake 是一个跨平台的编译工具。事实上Cmake并不直接构建出最终的软件，而是产生不同平台标准的构建档(如 Unix的Makefile 或是 Windows Visual C++的 projects/workspaces),然后再依一般的构建方式使用。 
+
+Make 通过编写的`makefile`脚本文件描述整个工程的编译、链接规则；通过脚本文件，对于复杂的工程也可以只通过一个命令就完成整个编译过程
+
+
+
+## kill
+
+killall
+
+killall可以根据名字来杀死进程
+
+```
+killall nginx
+killall -9 nginx
+```
+
+killall [参数] name
+
+参数：-r正则
+
+
+
+kill
+
+列出所有信号
+
+```
+kill -l 
+```
+
+彻底杀死
+
+```
+kill -9  2324
+```
+
+
+
+
+
+ 
+
+
+
+# TODO
+
+## mount
+
+
+
+
 
