@@ -251,3 +251,15 @@ netstat -nlp | grep 22010(pid)
 netstat -an | grep 3306 (port)
 ```
 
+##用户和用户组
+
+Linux下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建
+
+```
+useradd -d /home/jack -m jack
+
+userdel -r jack
+
+passwd jack
+```
+
