@@ -63,15 +63,19 @@ git checkout demo.py
 git init 
 ```
 
-初始化不带工作区的仓库
+
+
+在服务器创建仓库
 
 ```
-git init --bare
-```
+初始化不带工作区的仓库
+git init --bare  
 
 更改仓库所属用户
-
-```
 chown -R git:git runoob.git
 ```
+
+
+
+
 

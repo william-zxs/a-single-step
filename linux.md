@@ -316,6 +316,14 @@ rpm -qi <name>
 rpm -qf
 ```
 
+```
+.src.rpm
+这类软件包是包含了源代码的rpm包，在安装时需要进行编译
+rpm2cpio  demo.src.rpm  | cpio -id   可以得到demo的源码
+```
+
+
+
 ## yum
 
 ```
@@ -353,6 +361,17 @@ yum repolist
 ```
 yum provides libstdc++.so.6
 ```
+
+下载rpm包
+
+```
+yumdownloader keepalived
+
+下载.src.rpm源码包
+yumdownloader --source keepalived
+```
+
+
 
 ### 搭建自己的yum源
 
@@ -425,7 +444,7 @@ kill -9  2324
 
 ## mount
 
-
+###如何写一个systemctl管理的service
 
 
 
