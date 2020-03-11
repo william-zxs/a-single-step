@@ -101,11 +101,23 @@ todo
 
 ---
 
-##nohup  2>1&
+##nohup   
+
+nohup  [command]  >file 2>&1  &
 
 ```
-todo
+nohup 是不挂断，即当前shell关闭之后，程序不会接受挂断的信号
+>file 将标准输出输出到file
+2>&1 将错误输出重定向到标准输出 
+& 放在命令末尾，表示后台运行，防止终端被某个进程占用，终端关闭，进程也会停止。
 ```
+
+```
+> file 将标准输出输出到file，相当于 1>file
+2> errorfile  将错误输出到errorfile
+```
+
+
 
 ---
 
