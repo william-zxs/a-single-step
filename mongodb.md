@@ -40,6 +40,70 @@ MongoDB的副本集 是自带故障转移功能的主从复制
 
 
 
+```
+
+community:PRIMARY> rs.status()
+{
+	"set" : "community",
+	"date" : ISODate("2020-03-12T07:44:48.804Z"),
+	"myState" : 1,
+	"term" : NumberLong(2),
+	"heartbeatIntervalMillis" : NumberLong(2000),
+	"members" : [
+		{
+			"_id" : 0,
+			"name" : "192.168.0.10:32780",
+			"health" : 1,
+			"state" : 2,
+			"stateStr" : "SECONDARY",
+			"uptime" : 93,
+			"optime" : {
+				"ts" : Timestamp(1583999000, 2),
+				"t" : NumberLong(2)
+			},
+			"optimeDate" : ISODate("2020-03-12T07:43:20Z"),
+			"lastHeartbeat" : ISODate("2020-03-12T07:44:46.858Z"),
+			"lastHeartbeatRecv" : ISODate("2020-03-12T07:44:48.386Z"),
+			"pingMs" : NumberLong(1),
+			"syncingTo" : "192.168.0.11:32771",
+			"configVersion" : 32920
+		},
+		{
+			"_id" : 1,
+			"name" : "192.168.0.11:32771",
+			"health" : 1,
+			"state" : 1,
+			"stateStr" : "PRIMARY",
+			"uptime" : 13335,
+			"optime" : {
+				"ts" : Timestamp(1583999000, 2),
+				"t" : NumberLong(2)
+			},
+			"optimeDate" : ISODate("2020-03-12T07:43:20Z"),
+			"infoMessage" : "could not find member to sync from",
+			"electionTime" : Timestamp(1583999000, 1),
+			"electionDate" : ISODate("2020-03-12T07:43:20Z"),
+			"configVersion" : 32920,
+			"self" : true
+		}
+	],
+	"ok" : 1
+}
+
+
+-------
+state 值越小，权重越高
+
+
+
+```
+
+
+
+
+
+
+
 ### 配置副本集
 
 ```
