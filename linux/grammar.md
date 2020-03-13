@@ -41,3 +41,17 @@ william
 ~ 
 ```
 
+## &&   ||
+
+```
+1为true才执行2
+command1 &&  command2 
+3为flase才执行4
+command3 || command4
+```
+
+## \$PWD
+
+和 $(pwd)等效，环境变量，表示当前工作路径
+
+和pwd是不同的，pwd是命令
