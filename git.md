@@ -75,7 +75,7 @@ git init --bare
 chown -R git:git runoob.git
 ```
 
+##git fetch
 
-
-
+会更新本地仓库所有分支的代码，用于查看远端的更新
 

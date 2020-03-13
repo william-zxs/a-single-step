@@ -1,4 +1,4 @@
-#linux
+#Linux-redhat
 
 ##expect
 
@@ -434,6 +434,14 @@ kill -9  2324
 
 
 
+## systemctl 管理的service
+
+可以用systemctl管理服务
+
+实现开机自启动，在centos7及之后 rc.local的功能被弱化了，建议用systemctl 进行管理。
+
+详细见rsync.service
+
 
 
  
@@ -444,7 +452,7 @@ kill -9  2324
 
 ## mount
 
-###如何写一个systemctl管理的service
+###
 
 
 
