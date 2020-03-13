@@ -391,6 +391,28 @@ createrepo
 
 日志管理工具journalctl是centos7上专有的日志管理工具，该工具是从message这个文件里读取信息。
 
+```shell
+#查看某个unit的日志
+jounarlctl  -u  docker
+#查看本次启动日志
+journalctl  -b  -0
+#查看上次启动日志
+journalctl  -b  -1
+#查看尾部
+journalctl -n 20
+#查看内核日志
+journalctl -k
+
+#查看某个等级的日志。
+#等等
+```
+
+
+
+
+
+
+
 ## gcc、Make、CMake
 
 gcc 是GNU编译器套件，是Linux下默认的C/C++编译器.

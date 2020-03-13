@@ -14,11 +14,30 @@ bash是 GNU Bourne-Again SHell  (GNU 命令解释程序 “Bourne二世”)
 来源https://www.jianshu.com/p/070bd0b4855f
 ```
 
+# 语法
 
+在shell脚本中,变量赋值前后不要有空格
 
+```shell
+#e.g.
+time1=$(date "+%Y%m%d%H%M%S")
+```
 
+## 获取命令行参数
 
+test.sh
 
+```shell
+#!/bin/bash
 
+echo $1
+```
 
+调用
+
+```
+~ ./test.sh  william
+william
+~ 
+```
 

@@ -19,9 +19,25 @@
 mysqladmin -u root -p[oldpassword] password abc123
 
 创建数据库，删除数据库
-todo
 
 ```
+
+
+
+## mysqldump
+
+```shell
+#在备份时候注意binlog的备份
+mysqldump -h 192.168.1.100 -P 3306 -uroot -pabc123 --flush-logs  --single-transaction --data community > $bdir/community.sql
+```
+
+
+
+
+
+
+
+
 
 ##LOCK
 
