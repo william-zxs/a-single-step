@@ -42,7 +42,7 @@ Kafka
 
 redash
 
-
+pyinstaller
 
 ## 随便看看了
 
