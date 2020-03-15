@@ -8,7 +8,7 @@ tcp/ip
 
 mysqldump
 
-
+Tmux 
 
 ##一般
 
