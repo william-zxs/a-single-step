@@ -1,2 +1,2 @@
 # relearn-python
-linux & python & flask的再学习笔记
+关于计算机基础、linux、python、数据库的笔记
