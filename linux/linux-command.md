@@ -466,7 +466,23 @@ kill -9  2324
 
 
 
- 
+ ## chmod && chown
+
+chmod 用来更改文件/目录权限
+
+```
+      d rwx r-x r-x
+【文件或文件夹】【owner权限】【group权限】【others权限】
+【文件是-，文件夹是d】【r/w/x相加】【r/w/x相加】【r/w/x相加】
+r=4
+w=2
+x=1
+
+```
+
+
+
+
 
 
 

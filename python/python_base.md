@@ -108,3 +108,107 @@ unicode	str	字符	decode	显示
 | :-----: | :-----: | :--: | :----: | :--: |
 |   str   |  bytes  | 字节 | encode | 存储 |
 | unicode |   str   | 字符 | decode | 显示 |
+
+
+
+
+
+## dict
+
+###setdefault
+
+存在就返回存在的值（存在None就返回None），不存在就创建新的key-value加进去
+
+```python
+
+>>>a = {"name":"william"}
+>>>a.setdefault("age",20)
+>>>{"name":"william","age":20}
+
+```
+
+
+
+## 装饰器
+
+demo
+
+```python
+# coding=utf8
+
+def create_pro(fun):   #creapro = get_conns(fun) = ini
+    def ini_fun(*args, **kw):
+        if not isinstance(args[0], type(create_pro)):
+            print(args)
+            print('创建属性')
+            return fun(*args, **kw)
+        return fun(*args, **kw)
+    return ini_fun
+
+
+@create_pro
+def create_vertex(fun):
+
+    def dowork(args):
+        print(args)
+        print('创建顶点')
+
+    if not isinstance(fun, type(create_vertex)):
+        dowork(fun)
+    else:
+        def ini_fn(*args, **kw):
+            dowork(args)
+            return fun(*args, **kw)
+        return ini_fn
+
+@create_pro
+@create_vertex
+def create_edge(conn_id):
+    print('创建边')
+    return conn_id
+
+if __name__ == '__main__':
+
+    create_edge(1)
+    # create_vertex(1)
+```
+
+
+
+### class
+
+@staticmethod
+
+@classmethod
+
+```
+e.g.
+class Dog(object):
+		def __init__(self,name):
+				self.name = name
+		@classmethod
+		def color():
+				return 'yellow'
+		@staticmethod
+		def age():
+				return 5
+
+```
+
+---
+
+
+
+```
+from __future__ import absolute_import, unicode_literals
+```
+
+```
+sys.setdefaultencoding
+python3中不会存在
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe9 in position 0: ordinal not in range(128)
+Attempted relative import in non-package
+
+UnicodeDecodeError: 'utf8' codec can't decode byte 0x9c in position 1: invalid start byte
+```
+
