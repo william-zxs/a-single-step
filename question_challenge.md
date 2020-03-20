@@ -6,3 +6,12 @@ git merge 和 git rebase 的区别是什么？
 
 tcp/ip socket 的关系，实现原理？
 
+
+
+# 数据库
+
+阿里二面：熟悉Redis？讲讲你理解的Redis的持久化机制(RDB、AOF
+
+数据库高并发实现
+
+数据库锁（乐观锁，悲观锁，表锁，行锁）

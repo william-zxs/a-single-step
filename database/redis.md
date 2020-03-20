@@ -2,6 +2,10 @@
 
 
 
+redis_netlock
+
+使用redis做锁，
+
 
 
 

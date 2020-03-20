@@ -75,3 +75,5 @@ Flask-SQLALchemy的默认超时时间是2小时
 
 ```
 
+## mysql常用查询
+
