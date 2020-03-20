@@ -1,4 +1,4 @@
-# python三方库
+# python库
 
 ### six
 
