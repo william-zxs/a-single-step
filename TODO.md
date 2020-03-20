@@ -16,11 +16,13 @@ mysqldump
 
 理解linux的工作原理
 
-
+Elasticsearch
 
 ##一般
 
 python异步编程
+
+学习keepalived的脚本
 
 Tmux 
 
@@ -48,6 +50,8 @@ elasticsearch
 
 微服务架构、单体架构、分布式架构
 
+Linux  seq 
+
 ##很一般
 
 zookeeper
@@ -59,6 +63,8 @@ redash
 pyinstaller
 
 Canal 阿里开源的增量日志服务
+
+
 
 ## 随便看看了
 
