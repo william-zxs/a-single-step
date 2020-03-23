@@ -24,6 +24,12 @@ community的前端项目
 
 flask源码
 
+/etc/bashrc
+
+redis_netlock 做锁的实现原理
+
+整理高可用
+
 ##一般
 
 python异步编程

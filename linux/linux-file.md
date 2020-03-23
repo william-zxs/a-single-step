@@ -36,3 +36,14 @@ pwunconv
 
 每个用户都属于某个用户组；一个组中可以有多个用户，一个用户也可以属于不同的组。
 
+
+
+## /etc/bashrc
+
+/etc/bash_profile
+
+
+
+~/.bashrc
+
+~/.bash_profile
