@@ -73,3 +73,65 @@ ok
 和 $(pwd)等效，环境变量，表示当前工作路径
 
 和pwd是不同的，pwd是命令
+
+
+
+# 如何自定义一个命令
+
+写一个可执行文件(demo如下)
+
+```shell
+#!/bin/bash
+
+echo $@
+```
+
+放到PATH下即可
+
+
+
+# 在某个平台编译
+
+##1.从源码进行编译
+
+可以编译为二进制文件（可执行文件）
+
+
+
+## 2.可以从src.rpm包进行编译
+
+keepalived-1.3.5-1.el7.src.rpm 
+
+可以编译为rpm包
+
+也可以直接编译为可执行文件
+
+
+
+Linux下二进制包、源代码包、rpm包](https://www.cnblogs.com/cj2014/p/3728324.html)
+
+主要提供三种格式的mysql包：rpm格式、二进制格式、源码格式：（tar打包，gz压缩）
+
+rpm格式： libjpeg-devel-6b-33.x86_64.rpm    #rpm格式很好区分，
+
+二进制包： mysql-3.23.58-pc-linux-i686.tar.gz  #二进制格式的包名字很长，有版本号、适应平台、适应的硬件类型等，格式：mysql-<版本>-<OS>-tar.gz
+
+源码包：   php-5.2.14.tar.gz               #而源码格式仅仅就是一个版本号的tar包。#cj 安装区别：解压、./config、make、make install
+
+ 
+
+source code 是程序员写的码， 
+binary code 是机器跑的码。 
+source code 得经过 compile 才能成为 binary code 。 
+
+RPM 有分兩種：binary rpm 跟 source rpm 。 
+前者是編好的 binary ，安裝就可用。 
+後者是還沒編好的 source ，需 rebuild 之後才能安裝
+
+ 
+
+源代码方式和二进制包是软件包的两种形式。二进制包里面包括了已经经过编译，可以马上运行的程序。你只需要下载和解包（安装）它们以后，就马上可以使用。源代码包里面包括了程序原始的程序代码，需要在你的计算机上进行编译以后才可以产生可以运行程序,所以从源代码安装的时间会比较长。
+
+ 
+
+源码的安装一般由3个步骤组成：**配置(configure)、编译(make)、安装(make install)**。
