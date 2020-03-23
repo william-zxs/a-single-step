@@ -245,6 +245,12 @@ ps -ef | grep zabbix_server | awk '{print $2}' | xargs kill -9
 
 
 
+## sed
+
+sed -i  's/'
+
+
+
 ## netstat
 
 ```
@@ -479,6 +485,8 @@ w=2
 x=1
 
 ```
+
+
 
 
 

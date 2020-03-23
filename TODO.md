@@ -18,6 +18,10 @@ mysqldump
 
 Elasticsearch
 
+community的前端项目
+
+flask源码
+
 ##一般
 
 python异步编程
@@ -81,3 +85,5 @@ dynomite
 # 总结
 
 要多看别人提的问题，比如面试题，这样才知道学哪里
+
+可以刷刷大厂编程题，可以知道自己水平。
