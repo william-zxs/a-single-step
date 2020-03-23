@@ -333,7 +333,12 @@ rpm2cpio  demo.src.rpm  | cpio -id   可以得到demo的源码
 ## yum
 
 ```
-yum install
+yum install 
+
+Is this ok [y/d/N]:
+y：在线下载安装
+d：只下载不安装
+N：不安装
 ```
 
 列出所有可安装的软件
@@ -499,6 +504,10 @@ x=1
 设置指令的别名
 
 
+
+### wget
+
+下载文件
 
 
 
