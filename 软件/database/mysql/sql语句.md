@@ -1,6 +1,6 @@
 
 
-查看表的创建语句，使用引擎，字符集
+#查看表的创建语句，使用引擎，字符集
 
 ```
 show create table user;
@@ -8,7 +8,7 @@ show create table user;
 
 
 
-查看数据库的字符集情况
+#查看数据库的字符集情况
 
 ```
 >SHOW VARIABLES WHERE Variable_name LIKE 'character_set_%' OR Variable_name LIKE 'collation%';
@@ -36,7 +36,27 @@ show create table user;
 set character_set_connection = 'utf8mb4' （这是临时生效的，建议在配置中修改）
 ```
 
+# case
+
+```
+1.简单Case函数写法(注意sex的位置)
+
+select *,(CASE sex WHEN '1' THEN '男' WHEN '0' THEN '女' ELSE '保密' END) as sex_text
+from user
+
+2.Case搜索函数写法(注意sex的位置【推荐】)
+
+select *,(CASE WHEN sex='1' THEN '男' WHEN sex='0' THEN '女' ELSE '保密' END) as sex_text
+from user
+```
 
 
 
+# distinct
+
+去除重复值
+
+```sql
+SELECT DISTINCT 列名称 FROM 表名称
+```
 

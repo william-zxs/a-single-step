@@ -32,6 +32,8 @@ redis_netlock 做锁的实现原理
 
 ##一般
 
+docker 中layer概念
+
 python异步编程
 
 Pyenv的实现，源码。
