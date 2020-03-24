@@ -78,6 +78,14 @@ pyinstaller
 
 Canal 阿里开源的增量日志服务
 
+##先记着
+
+域名解析
+
+dns
+
+数据库连接池 pymysql  pymongo  redis
+
 
 
 ## 随便看看了
