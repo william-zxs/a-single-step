@@ -521,9 +521,9 @@ x=1
 
 # TODO
 
-## mount
+## mount  fdisk  
 
-###
+梁博微博的linux挂在硬盘并分区
 
 
 
