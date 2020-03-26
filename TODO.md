@@ -4,6 +4,8 @@
 
 (分清楚哪些是重要的，哪些是你自己想做但是不重要的)
 
+flask源码，还需要继续看
+
 做一个https
 
 网络七层协议
@@ -21,8 +23,6 @@ mysqldump
 Elasticsearch
 
 community的前端项目
-
-flask源码
 
 /etc/bashrc
 
