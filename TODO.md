@@ -36,6 +36,10 @@ Elasticsearch
 
 ##一般
 
+JWT
+
+到底什么是restful
+
 docker 中layer概念
 
 python异步编程
@@ -89,6 +93,8 @@ redash
 pyinstaller
 
 Canal 阿里开源的增量日志服务
+
+url和uri区别
 
 ##先记着
 

@@ -75,9 +75,7 @@ git init --bare
 chown -R git:git runoob.git
 ```
 
-git init --bare  和 git init 不同的分析。
-
-
+git init --bare  和 git init 不同的分析
 
 
 
@@ -86,4 +84,26 @@ git init --bare  和 git init 不同的分析。
 
 
 会更新本地仓库所有分支的代码，用于查看远端的更新
+
+## git remote 
+
+产看 增加 删除远端分支
+
+
+
+
+
+# git工作流程
+
+
+
+#github上fork别人之后如何同步原作者
+
+
+
+
+
+
+
+
 
