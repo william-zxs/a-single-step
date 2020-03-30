@@ -15,3 +15,20 @@ final
 interface
 
 接口和抽象类
+
+
+
+
+
+![image-20200330182449659](/Users/william/Library/Application Support/typora-user-images/image-20200330182449659.png)
+
+#限定符
+
+protected
+
+private
+
+public
+
+无（默认）
+
