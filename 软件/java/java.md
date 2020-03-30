@@ -18,10 +18,6 @@ interface
 
 
 
-
-
-![image-20200330182449659](/Users/william/Library/Application Support/typora-user-images/image-20200330182449659.png)
-
 #限定符
 
 protected
@@ -31,4 +27,11 @@ private
 public
 
 无（默认）
+
+|   修饰词   | 本类 | 同一个包的类 | 继承类 | 其他类 |
+| :--------: | :--: | :----------: | :----: | :----: |
+|  privite   |  Y   |      X       |   X    |   X    |
+| 无（默认） |  Y   |      Y       |   X    |   X    |
+| protected  |  Y   |      Y       |   Y    |   X    |
+|   public   |  Y   |      Y       |   Y    |   Y    |
 
