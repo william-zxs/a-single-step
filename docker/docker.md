@@ -35,3 +35,9 @@ b.在docker run 的时候注入
 
 这两种方式定义的环境变量都会注入到容器env中
 
+
+
+#Dockerfile
+
+`Dockerfile` 构建分层存储的概念
+
