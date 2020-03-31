@@ -45,3 +45,14 @@ public
 start = start < 0 ? 0:start;
 ```
 
+
+
+#interface 
+
+implements 实现接口，可以实现多个接口
+
+
+
+#abstract
+
+extends 继承类
