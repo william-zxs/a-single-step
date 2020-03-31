@@ -1,5 +1,33 @@
 # python基础知识
 
+## python语言类型
+
+python是强类型动态语言
+
+```
+强类型  如 java python c
+1+'1'
+error
+弱类型  如 js php
+1+ ‘1’
+‘11’
+```
+
+```
+x + y 
+
+在代码执行前并不知道x 和y是什么类型的数据
+
+静态语言 c/c++ java  c#
+动态语言 python  js  ruby php
+```
+
+
+
+
+
+
+
 ##深拷贝和浅拷贝
 
 函数内部也可以改变全局变量
