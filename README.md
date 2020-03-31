@@ -1,6 +1,8 @@
 # FBI warning
 这是一个MD项目！
 
+团结 紧张 严肃 活泼
+
 
 # relearn-python
 关于计算机基础、linux、python、数据库的笔记

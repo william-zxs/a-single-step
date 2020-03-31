@@ -98,3 +98,17 @@ mysql的utf8并不是真正意义上的utf8，mysql的utf8只支持最长三个�
        因为mysql的char列类型在utf8mb4下, 为了保证所有的数据都存的下, char将会占用字符数*4的字节数 (mysql的char列类型utf8将占用字符数*3的字节数), 以保证空间分配足够. 所以建议用可变长度varchar, 以节省空间. 可变长度消耗的存储空间为: 实际存储需要的字节数+1或2个字节表达的长度
 
 
+
+
+
+# like
+
+```
+select * from user where name like "Will%";
+
+select * from user where name like "%张先森";
+
+select * from user where name like "%ill%";
+```
+
+第一种和第二种会触发索引，第三种不会。

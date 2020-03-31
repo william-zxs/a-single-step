@@ -35,3 +35,13 @@ public
 | protected  |  Y   |      Y       |   Y    |   X    |
 |   public   |  Y   |      Y       |   Y    |   Y    |
 
+
+
+
+
+#三元
+
+```java
+start = start < 0 ? 0:start;
+```
+
