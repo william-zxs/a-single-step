@@ -6,7 +6,9 @@ mvnw的脚本可以用来学习shell
 
 for 循环 批量修改.txt 为.py
 
-awk  xargs
+awk  
 
+xargs
 
+删除所有的容器
 
