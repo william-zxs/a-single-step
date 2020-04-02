@@ -11,3 +11,9 @@ a) Seriable（串行化）：可避免脏读、不可重复读、幻读的发生
 b) Repeated read（可重复读）：可避免脏读、不可重复读的发生
 c) Read committed（读已提交）：可避免脏读的发生
 d) Read uncommitted（读未提交）：最低级别，任何情况都无法保证
+
+
+
+
+
+mysql可以没有主键吗，主键可以是别的字段吗

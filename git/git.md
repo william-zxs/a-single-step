@@ -101,6 +101,10 @@ git init --bare  和 git init 不同的分析
 
 
 
+添加多个远端
+
+
+
 
 
 

@@ -545,6 +545,18 @@ hwclock --hctosys
 
 
 
+##which
+
+查看某个命令的路径
+
+
+
+## whereis
+
+查看命令相关的路径
+
+比which显示的信息更多一些
+
 
 
 

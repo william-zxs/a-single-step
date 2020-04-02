@@ -112,3 +112,9 @@ select * from user where name like "%ill%";
 ```
 
 第一种和第二种会触发索引，第三种不会。
+
+
+
+# 关键字
+
+mysql不能用order作为表名，因为order是mysql 的关键字，用order作为表名会出现问题。

@@ -31,7 +31,15 @@ https://baijiahao.baidu.com/s?id=1636927461989417537&wfr=spider&for=pc
 
 
 
-范型
+#范型
+
+类型参数<T>    无界通配符 <?>
+
+有界通配符<? extends XXX>    <? super XXX>
+
+
+
+
 
 怎么做一个package
 
@@ -61,3 +69,13 @@ springboot 中的test怎么用
 
 
 什么时候import 什么时候注解
+
+
+
+
+
+在java中创建对象等号左右类名不同时：
+
+Animal dog= new Dog()
+
+dog表现出的特点
