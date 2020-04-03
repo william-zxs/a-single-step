@@ -181,3 +181,32 @@ enum
  **V** - Value（值）
 
  **N** - Number（数值类型）
+
+
+
+#匿名函数
+
+lambda函数  箭头函数
+
+e.g.
+
+```
+@Bean
+public GlobalClientInterceptorConfigurer globalInterceptorConfigurerAdapter() {
+    return registry -> registry.addClientInterceptors(new LogGrpcInterceptor());
+}
+```
+
+
+
+#单双引号
+
+区别1：java中的[单引号](https://www.baidu.com/s?wd=单引号&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)表示字符，java中的[双引号](https://www.baidu.com/s?wd=双引号&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)是字符串。
+
+区别2：[单引号](https://www.baidu.com/s?wd=单引号&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)引的数据一般是char类型的；[双引号](https://www.baidu.com/s?wd=双引号&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)引的数据 是String类型的。
+
+区别3：java中[单引号](https://www.baidu.com/s?wd=单引号&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)里面只能放一个字母或数字或符号；java中的[双引号](https://www.baidu.com/s?wd=双引号&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)里面是0到多个字符构成。所以字符可以直接转换成字符串。字符串需要使用charAt（n) 来获取第几个字符。
+
+char定义时用单引号，只能有一个字母，数字。char c='c'；而String用双引号，可以是一个，也可能是多个字母，汉字等。就是所谓的字符串。String s="adsaf";
+
+char只是一个基本类型，而String 可以是一个类，可以直接引用。比如char c='c';不能直接对c调用方法。String s="abc";  这时可以调用s.charAt(0);等方法,因为String是类，这是就是对象的调用了
