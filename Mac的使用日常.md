@@ -12,7 +12,7 @@
 
 #launchctl
 
-launchctl 通过.plist 文件管理Mac os中的进程
+launchctl 通过.plist 文件管理Mac os中的进程,brew 安装的程序都会生成一个.plist
 
  .plist文件中定义了程序的启动命令
 
