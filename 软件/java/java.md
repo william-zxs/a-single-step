@@ -210,3 +210,14 @@ public GlobalClientInterceptorConfigurer globalInterceptorConfigurerAdapter() {
 char定义时用单引号，只能有一个字母，数字。char c='c'；而String用双引号，可以是一个，也可能是多个字母，汉字等。就是所谓的字符串。String s="adsaf";
 
 char只是一个基本类型，而String 可以是一个类，可以直接引用。比如char c='c';不能直接对c调用方法。String s="abc";  这时可以调用s.charAt(0);等方法,因为String是类，这是就是对象的调用了
+
+
+
+
+
+
+
+#  lambda
+
+函数式接口
+
