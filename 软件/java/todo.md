@@ -92,6 +92,8 @@ dog表现出的特点
 
 https://www.runoob.com/w3cnote/java-annotation.html
 
+如何自定义个注解，以及注解工作过程和原理
+
 
 
 IoC
@@ -113,6 +115,10 @@ double
 long
 
 float
+
+```
+import java.util.Map;
+```
 
 
 
@@ -161,4 +167,18 @@ maven项目的依赖管理（多项目之间互相依赖，以及依赖的第三
 # 返回值
 
 java项目中的返回值，怎么返回数组
+
+
+
+
+
+DAO层都包括什么
+
+System.out::println
+
+h2database
+
+
+
+
 
