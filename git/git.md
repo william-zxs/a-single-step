@@ -90,7 +90,13 @@ git init --bare  和 git init 不同的分析
 
 产看 增加 删除远端分支
 
+ 
 
+## git push
+
+删除远端分支
+
+git push origin :web-william 
 
 
 

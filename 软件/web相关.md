@@ -51,3 +51,19 @@ URN Uniform Resource Name（统一资源命名），作为特定内容的唯一�
 get 和 post的区别
 
 get可以传送json吗
+
+
+
+
+
+# 跨域
+
+JSONP
+
+CORS
+
+
+
+# jar war
+
+jar 和 war在工作使用中的异同
