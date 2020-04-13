@@ -188,3 +188,13 @@ DTO
 
 
 
+```
+private @Autowired HttpServletRequest request;
+```
+
+```
+@GetMapping(value = "/public", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Map<String, String> handlePublicRequest() {
+		return Collections.singletonMap("message", productService.getPublic());
+	}
+```

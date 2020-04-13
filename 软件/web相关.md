@@ -44,6 +44,10 @@ URN Uniform Resource Name（统一资源命名），作为特定内容的唯一�
 
 # RESTful
 
+RESTful API的原则之一是无状态
+
+
+
 ## HTTP状态码
 
 ##CRUD
