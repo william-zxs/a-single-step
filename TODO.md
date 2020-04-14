@@ -4,11 +4,11 @@
 
 尝试在不同平台从源码编译一下keeplived/MHA
 
-
-
-
+docker-compose的使用
 
 #重要不紧急
+
+jq 命令，处理json数据
 
 浏览器的访问过程
 
@@ -55,8 +55,6 @@ numpy
 ##一般
 
 crs新架构的代码
-
-JWT
 
 到底什么是restful
 
