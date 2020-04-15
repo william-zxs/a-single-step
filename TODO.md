@@ -2,11 +2,21 @@
 
 (分清楚哪些是重要的，哪些是你自己想做但是不重要的)
 
+整理springboot+keycloak
+
+
+
+#重要不紧急
+
+docker-compose
+
 尝试在不同平台从源码编译一下keeplived/MHA
 
 docker-compose的使用
 
-#重要不紧急
+SSL/TLS这样的传输层安全的协议   工作原理
+
+DDD
 
 JWT 和 JWS
 
