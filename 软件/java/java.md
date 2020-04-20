@@ -231,3 +231,10 @@ char只是一个基本类型，而String 可以是一个类，可以直接引用
 
 #List 、Awrrays 、ArrayList、Map、Collections
 
+
+
+
+
+# java
+
+在java8 191及之前的版本的jvm，在容器中运行时不会感知到自己是在容器环境，感知到的内存是host的内存（一般是host的四分之一），手动配置最大内存需要 加参数才能生效，191之后的版本可以直接在命令行生效。
