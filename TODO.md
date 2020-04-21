@@ -8,7 +8,7 @@
 
 #重要不紧急
 
-docker-compose
+docker-compose & 这个命令是怎么实现的（一个python包）
 
 尝试在不同平台从源码编译一下keeplived/MHA
 
