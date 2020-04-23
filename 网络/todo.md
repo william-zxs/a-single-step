@@ -10,5 +10,5 @@ HTTP认证之摘要认证——Digest
 
 网关
 
-
+X-Forwarded-For 真实ip
 

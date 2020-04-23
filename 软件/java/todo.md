@@ -198,3 +198,11 @@ private @Autowired HttpServletRequest request;
 		return Collections.singletonMap("message", productService.getPublic());
 	}
 ```
+
+
+
+
+
+
+
+SPI机制
