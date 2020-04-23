@@ -206,3 +206,8 @@ private @Autowired HttpServletRequest request;
 
 
 SPI机制
+
+
+
+链式调用
+
