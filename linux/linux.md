@@ -20,3 +20,14 @@ bash是 GNU Bourne-Again SHell  (GNU 命令解释程序 “Bourne二世”)
 来源https://www.jianshu.com/p/070bd0b4855f
 ```
 
+
+
+# Console 
+
+**Console 和 Terminal**
+
+
+
+ctrl+alt+f1 ..... f6
+
+ ctrl+alt+f7 图形界面
