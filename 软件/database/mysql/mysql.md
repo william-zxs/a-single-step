@@ -15,7 +15,9 @@
 ##mysqladmin
 
 ```
-修改密码（初始化密码）
+初始化密码
+mysqladmin -u root  password abc123
+修改密码
 mysqladmin -u root -p[oldpassword] password abc123
 
 创建数据库，删除数据库
