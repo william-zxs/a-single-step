@@ -46,7 +46,9 @@ MyBatis创建实体不需要@Entity，@Entity属于JPA的专属注解
 
 
 
+#Jackson
 
+Jackson 是当前用的比较广泛的，用来序列化和反序列化 json 的 Java 的开源框架
 
 
 
