@@ -17,6 +17,7 @@ git管理的文件有三种状态：已修改（modified）,已暂存（staged�
 ```
 git rebase -i  asdadsadaddadada
 一个自己分支比较早的hashid，就可以选择保留哪些提交，删除掉哪些提交。
+可以用来将多个commit 合并成一个commit
 ```
 
 git pull 默认策略是merge
@@ -89,6 +90,12 @@ git init --bare  和 git init 不同的分析
 ## git remote 
 
 产看 增加 删除远端分支
+
+git remote  add   唯一名字  地址
+
+git remote remove
+
+git fetch gitlab master
 
  
 
