@@ -120,3 +120,15 @@ select * from user where name like "%ill%";
 # 关键字
 
 mysql不能用order作为表名，因为order是mysql 的关键字，用order作为表名会出现问题。
+
+
+
+
+
+#mysql复制策略：
+
+异步复制  
+
+半同步复制 （至少保证一个从库同步了binlog）
+
+全同步复制
