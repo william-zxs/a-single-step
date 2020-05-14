@@ -132,3 +132,11 @@ mysql不能用order作为表名，因为order是mysql 的关键字，用order作
 半同步复制 （至少保证一个从库同步了binlog）
 
 全同步复制
+
+
+
+
+
+# 外间约束
+
+  **SET FOREIGN_KEY_CHECKS=0;**
