@@ -140,3 +140,13 @@ mysql不能用order作为表名，因为order是mysql 的关键字，用order作
 # 外间约束
 
   **SET FOREIGN_KEY_CHECKS=0;**
+
+
+
+
+
+#varchar
+
+假设  类型为varchar(100)   的字段存了 字符串 “abc”。
+
+实际占用的存储是三个字符，但是读取的时候，会分配100字符的内存。
