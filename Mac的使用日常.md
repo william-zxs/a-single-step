@@ -65,3 +65,9 @@ launchctl list
 
 
 
+#Chrome
+
+当连接http 请求时，chrome 提示不安全，没有高级   继续的按钮，
+
+在chrome该页面上，直接键盘敲入这11个字符：`thisisunsafe`
+
