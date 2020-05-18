@@ -160,3 +160,15 @@ mysql不能用order作为表名，因为order是mysql 的关键字，用order作
 浮点数：float单精度        double双精度
 
 定点数：decimal  金钱类数据
+
+
+
+float能代表的十进制 的最大精度小数点后7位
+double 能代表的 十进制 的最大进度是小数点后15位
+
+decimal能拥有更高的精度:28位
+
+但是decimal的性能要比float/double慢很多.性能为后者的1/20
+
+人类发明的任何概念,比如金融数据和比赛分数,适用于decimal
+而其他的一些自然数据,当我们对精度要求不高的时候,可以使用float/double
