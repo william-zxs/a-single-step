@@ -121,7 +121,7 @@ git push origin :web-william
 
 
 
+# --author
 
-
-
+git log --author="william"
 
