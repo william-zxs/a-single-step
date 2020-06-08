@@ -67,3 +67,17 @@ SELECT DISTINCT 列名称 FROM 表名称
 # 笛卡尔积
 
 了解笛卡尔积的影响和作用
+
+
+
+
+
+#select count(1)
+
+```
+原理和区别
+select count(1)
+select count(*)
+select count(主键)
+```
+
