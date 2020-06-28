@@ -59,4 +59,5 @@
 耐心和恒心总会得到报酬的。——**爱因斯坦**
 
 # 资料
-golang[https://books.studygolang.com/gopl-zh/ch0/ch0-01.html]
+[golang](https://books.studygolang.com/gopl-zh/ch0/ch0-01.html)
+[算法](https://greyireland.gitbook.io/algorithm-pattern/)
