@@ -2,6 +2,8 @@
 
 团结 紧张 严肃 活泼
 
+# think bigger
+
 # Jeff Bezos's cool & not cool
 
 粗鲁不酷 Rudeness is not cool.
