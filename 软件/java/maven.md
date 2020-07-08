@@ -28,3 +28,17 @@
 
 简单地说，Maven Wrapper就是给一个项目提供一个独立的，指定版本的Maven给它使用。
 
+
+
+# 常用命令
+**跳过单元测试**
+```
+mvn clean package -Dmaven.test.skip=true
+```
+**指定配置文件**
+配置多配置文件后
+```
+mvn test -P test
+mvn springboot:run -P dev
+mvn clean package -P prod
+```
