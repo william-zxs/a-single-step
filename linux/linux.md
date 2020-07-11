@@ -31,3 +31,5 @@ bash是 GNU Bourne-Again SHell  (GNU 命令解释程序 “Bourne二世”)
 ctrl+alt+f1 ..... f6
 
  ctrl+alt+f7 图形界面
+
+ 

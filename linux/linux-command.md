@@ -558,7 +558,8 @@ hwclock --hctosys
 比which显示的信息更多一些
 
 
-
+## lsmod
+lsmod(list modules)命令用于显示已载入系统的模块
 
 
 # TODO
