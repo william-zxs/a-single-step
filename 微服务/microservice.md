@@ -1,0 +1,4 @@
+# concepts
+CQRS
+
+DDD
