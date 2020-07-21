@@ -1,6 +1,6 @@
 
 
-#micrometer
+# micrometer
 
 ```
 index_cost.record(() -> {
@@ -11,4 +11,10 @@ index_cost.record(() -> {
     }
 });
 ```
+
+**判断是否为空**
+```
+ObjectUtils.isEmpty(order)
+```
+
 
