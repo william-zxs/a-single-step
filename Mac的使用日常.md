@@ -111,3 +111,8 @@ function proxy_on() {
     echo -e "已开启代理"
 }
 ```
+
+打开当前文件夹
+```
+open .
+```
