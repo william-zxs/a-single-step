@@ -107,7 +107,7 @@ git push origin :web-william
 
 
 
-# git工作流程
+## git工作流程
 
 
 
@@ -121,7 +121,10 @@ git push origin :web-william
 
 
 
-# --author
+## --author
 
 git log --author="william"
+
+## 更新上次提交的注释
+git commit --amend -m "新的注释"
 
