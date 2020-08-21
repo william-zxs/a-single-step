@@ -116,3 +116,10 @@ function proxy_on() {
 ```
 open .
 ```
+
+# 出现的问题
+睡眠后无法通过键盘唤醒，只能点击电源键。
+恢复方式：重置scm
+```
+https://support.apple.com/zh-cn/HT201295
+```
