@@ -123,3 +123,17 @@ open .
 ```
 https://support.apple.com/zh-cn/HT201295
 ```
+# 提示已损坏或者无法打开
+
+两种处理方式
+```
+1. sudo spctl --master-disable
+```
+执行1之后，可以在隐私中选择 任何来源
+如果1没有效果，可以试2
+
+```
+2. sudo xattr -rd com.apple.quarantine /Applications/LockedApp.app
+```
+
+
