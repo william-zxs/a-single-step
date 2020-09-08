@@ -39,3 +39,9 @@ stringRedisTemplate.opsForList();[List(列表)]
 stringRedisTemplate.opsForSet();[Set(集合)]
 stringRedisTemplate.opsForHash();[Hash(散列)]
 stringRedisTemplate.opsForZSet();[ZSet(有序集合)]
+
+
+# value 中文显示十六进制
+shell下中文显示十六进制
+原因：编发方式不一致
+方法：redis-cli  --raw
