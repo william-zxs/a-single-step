@@ -34,3 +34,8 @@ ctrl+alt+f1 ..... f6
 
  # linux文件的尾缀
  .png 和 .jpeg 可以随便改，因为linux文件的尾缀只是一个标示的作用。
+
+ # su
+ ```
+ su - username  可以使用username 的环境变量
+ ```
