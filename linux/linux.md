@@ -32,4 +32,5 @@ ctrl+alt+f1 ..... f6
 
  ctrl+alt+f7 图形界面
 
- 
+ # linux文件的尾缀
+ .png 和 .jpeg 可以随便改，因为linux文件的尾缀只是一个标示的作用。
