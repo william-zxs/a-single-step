@@ -202,3 +202,12 @@ int(11) 和int(10)的区别，大小并没有限制，只是自动填充0的区�
 # 开销
 
 * 衡量查询开销三个指标：响应时间、扫描的行数、返回的行数
+
+# 批量删除表
+生成删除表语句
+```
+Select CONCAT( 'drop table ', table_name, ';' ) FROM information_schema.tables Where table_name LIKE 'sample_%';
+```
+
+
+
