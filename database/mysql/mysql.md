@@ -209,5 +209,12 @@ int(11) 和int(10)的区别，大小并没有限制，只是自动填充0的区�
 Select CONCAT( 'drop table ', table_name, ';' ) FROM information_schema.tables Where table_name LIKE 'sample_%';
 ```
 
-
+# 查询是否缺失某个id段
+```
+SELECT a.id+1 AS START, MIN(b.id) - 1 AS END
+    FROM `al_14_order` AS a, `al_14_order` AS b
+    WHERE a.id < b.id
+    GROUP BY a.id
+    HAVING START < MIN(b.id)
+```
 
