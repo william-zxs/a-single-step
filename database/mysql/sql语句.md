@@ -81,3 +81,14 @@ select count(*)
 select count(主键)
 ```
 
+
+```
+select b.fphm,min(b.kshm),max(b.kshm)
+    from (
+            select a.*,to_number(a.kshm-rownum) cc
+            from (
+                    select * from t order by fphm,kshm
+            ) a
+    )  b
+    group by b.fphm,b.cc
+```
