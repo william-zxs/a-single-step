@@ -131,4 +131,6 @@ git commit --amend -m "新的注释"
 
 
 ## git cherry-pick
-git cherry-pick <commitHash>
+git cherry-pick <commitHash>ß
+
+可以转移一个、多个提交
