@@ -42,3 +42,8 @@ mvn test -P test
 mvn springboot:run -P dev
 mvn clean package -P prod
 ```
+
+**将配置更新到私服**
+```
+mvn clean deploy
+```
