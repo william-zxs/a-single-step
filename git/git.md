@@ -134,3 +134,6 @@ git commit --amend -m "新的注释"
 git cherry-pick <commitHash>ß
 
 可以转移一个、多个提交
+
+## git checkout filename
+暂存区覆盖工作区
