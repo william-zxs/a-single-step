@@ -1,0 +1,240 @@
+多线程操作数据库进行数据插入，出现异常就回滚。
+举例：解析excel数据导入到数据库，要么全部成功，要么全部失败。
+如果在一个方法中用事务控制数据量大，耗时久，有时候还会超出mysql连接能接受的最大数据包范围。所以采用多线程来导入，但是多线程在突发异常情况下不能控制整批数据的原子性，会造成成功的没有回滚，在某些业务下影响体验，因此使用多线程+事务控制就OK了。
+
+核心思想：就是使用两个CountDownWatch实现子线程的二段提交
+步骤：
+主线程将任务分发给子线程，然后子计数器等待，阻塞主线程，等待所有子线程处理向数据库中插入的业务。
+释放子线程锁定，同时使用主计数器等待，阻塞子线程，将程序的控制权交还给主线程
+主线程检查子线程执行插入数据库的结果，若有非预期结果出现，主线程标记状态告知子线程回滚，然后程序控制权再次交给子线程，子线程检测回滚标志，判断是否回滚，然后回滚/提交。
+
+
+# 入口类代码
+```
+package com.sinodata.lottery.allocation.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import java.util.concurrent.Executors;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.*;
+
+
+@Service
+public class ThreadTest {
+
+    class Rollback {
+        public Rollback(Boolean needRoolBack) {
+            this.needRoolBack = needRoolBack;
+        }
+
+        private Boolean needRoolBack = false;
+
+        public Boolean getNeedRoolBack() {
+            return needRoolBack;
+        }
+
+        public void setNeedRoolBack(Boolean needRoolBack) {
+            this.needRoolBack = needRoolBack;
+        }
+    }
+
+
+
+
+    public  void ImportThread(List<Map<String,Object>> list){
+        int taskSize = list.size();
+        //每条线程最小处理任务数
+        int perThreadHandleCount = 500;
+        //线程池的最大线程数,用CPU数量来设置
+        int cpu=Runtime.getRuntime().availableProcessors();
+        //默认线程cpu*2+2
+        int nThreads =cpu*2+2;
+        if (taskSize > nThreads * perThreadHandleCount) {
+            perThreadHandleCount = taskSize % nThreads == 0 ? taskSize / nThreads : taskSize / nThreads + 1;
+            nThreads = taskSize % perThreadHandleCount == 0 ? taskSize / perThreadHandleCount : taskSize / perThreadHandleCount + 1;
+        }
+
+        //监控子线程的任务执行
+        CountDownLatch childMonitor = new CountDownLatch(nThreads);
+        //监控主线程，是否需要回滚
+        CountDownLatch mainMonitor = new CountDownLatch(1);
+
+        //存储任务的返回结果，返回true表示不需要回滚，反之，则回滚
+        BlockingDeque<Boolean> results = new LinkedBlockingDeque<Boolean>(nThreads);
+        //必须要使用对象，如果使用变量会造成线程之间不可共享变量值
+        Rollback rollback = new Rollback(false);
+
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(nThreads);
+
+        try {
+
+            for (int i = 0; i < nThreads; i++) {
+                int lastIndex = (i + 1) * perThreadHandleCount;
+                List listVos = list.subList(i * perThreadHandleCount, lastIndex >= taskSize ? taskSize : lastIndex);
+                Task functionThread = new Task(mainMonitor, childMonitor, rollback, results, listVos);
+                fixedThreadPool.execute(functionThread);
+            }
+            //监测子线程的执行
+            boolean await = childMonitor.await(5, TimeUnit.MINUTES);
+            System.out.println("插入完成，开始判断是否需要回滚----");
+            if (!await) {
+                rollback.setNeedRoolBack(true);
+            }else {
+                //根据返回结果来确定是否回滚
+                for (int i = 0; i < results.size(); i++) {
+                    Boolean result = results.take();
+                    if (!result) {
+                        rollback.setNeedRoolBack(true);
+                    }
+                }
+                if (rollback.getNeedRoolBack())
+                    System.out.println("错误-------------------------------------开始回滚");
+                else System.out.println("插入完成---------------------------------------");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            rollback.setNeedRoolBack(true);
+        }catch (Error e){
+            e.printStackTrace();
+            rollback.setNeedRoolBack(true);
+        }
+        finally {
+            //主线程计数器归零，子线程开始执行
+            mainMonitor.countDown();
+            fixedThreadPool.shutdown();
+        }
+    }
+}
+
+```
+
+# 任务类
+```
+package com.sinodata.lottery.allocation.service.impl;
+
+//import com.dao.comm.Dao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.CountDownLatch;
+
+
+//@Service
+public class Task implements Runnable {
+
+    /**
+     * Spring事务管理器
+     */
+    @Autowired
+    private DataSourceTransactionManager txManager;
+
+//    private Dao dao = (Dao) ApplicationContextProvider.getBean("daoImpl");
+
+    /**
+     * 监控子任务的执行
+     */
+    private CountDownLatch childMonitor;
+    /**
+     * 监控主线程
+     */
+    private CountDownLatch mainMonitor;
+
+    /**
+     * 存储线程的返回结果
+     */
+    private BlockingDeque<Boolean> resultList;
+    /**
+     * 回滚类
+     */
+    private ThreadTest.Rollback rollback;
+    /**
+     * 要插入的数据
+     */
+    private List<Map<String, Object>> list;
+
+    /**
+     * @param list
+     * @param childCountDown
+     * @param mainCountDown
+     * @param result
+     * @param rollback
+     */
+    public Task(CountDownLatch mainCountDown, CountDownLatch childCountDown, ThreadTest.Rollback rollback, BlockingDeque<Boolean> result, List<Map<String, Object>> list) {
+        this.childMonitor = childCountDown;
+        this.mainMonitor = mainCountDown;
+        this.resultList = result;
+        this.rollback = rollback;
+        this.list = list;
+    }
+
+    private void shouldRollBack(TransactionStatus status) {
+        txManager.rollback(status);
+    }
+
+    /**
+     * 事务提交
+     */
+    private void submit(TransactionStatus status) {
+        txManager.commit(status);
+    }
+
+    /**
+     * 执行任务,返回false表示任务执行错误，需要回滚
+     *
+     * @return
+     */
+    private void processTask(CountDownLatch mainCountDown, CountDownLatch childCountDown, ThreadTest.Rollback rollback, BlockingDeque<Boolean> result, List<Map<String, Object>> list)  {
+        //开启事务
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setName(java.util.UUID.randomUUID().toString());
+        // 事物隔离级别，开启新事务
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+        TransactionStatus status = txManager.getTransaction(def);
+
+        try {
+            if(Thread.currentThread().getName().equals("pool-1-thread-8")){
+                throw new Exception("第八个线程出错");
+            }
+            System.out.println("事务名字==========="+def.getName());
+            Map params = new HashMap();
+            params.put("paramList", list);
+//            dao.insert("insertUser", params);
+            resultList.add(true);
+            childMonitor.countDown();
+            //等待主线程的判断逻辑执行完，执行下面的是否回滚逻辑
+            mainMonitor.await();
+        } catch (Exception e) {
+            e.printStackTrace();
+            childMonitor.countDown();
+            resultList.add(false);
+        } catch (Error e) {
+            e.printStackTrace();
+            childMonitor.countDown();
+            resultList.add(false);
+        }
+        //执行提交/回滚
+        if (rollback.getNeedRoolBack()) shouldRollBack(status);
+        else  submit(status);
+
+
+
+    }
+    public void run () {
+        //为了保证事务不提交，此处只能调用一个有事务的方法，spring 中事务的颗粒度是方法，只有方法不退出，事务才不会提交
+        processTask(mainMonitor, childMonitor, rollback, resultList, list);
+    }
+
+
+}
+
+```
