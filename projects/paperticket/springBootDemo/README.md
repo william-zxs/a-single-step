@@ -1,11 +1,14 @@
 # 技术栈
 
-* rest客户端、服务端
-* grpc客户端、服务端
-* rocketMQ客户端、服务端
+* rest
+* grpc
+* rocketMQ
 * redis
 * mysql
+* maven 私服 nexus
 
+## grpc
+rpc技术以及grpc技术
 
 
 
