@@ -54,7 +54,7 @@ launchctl list
 
 * B:
 
-  名称是 launctl list 中的名称
+  名称是 launchctl list 中的名称
 
   ```
   alias mongodb.start='launchctl start homebrew.mxcl.mongodb' 
