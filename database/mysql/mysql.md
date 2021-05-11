@@ -218,3 +218,15 @@ SELECT a.id+1 AS START, MIN(b.id) - 1 AS END
     HAVING START < MIN(b.id)
 ```
 
+
+
+# MySQL查看正在执行的SQL进程
+show processlist;
+
+看到详细的sql
+select * from information_schema.processlist;
+
+杀掉相应的进程
+kill 进程ID
+
+
