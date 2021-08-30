@@ -880,3 +880,284 @@ synchronized(this){}
 访问百度的步骤
 
 
+小米java开发二面面经
+
+* 切面可能失效的原因
+AOP实现的方式：
+通过jdk动态代理
+CGLIB
+如果被代理的目标对象实现了至少一个接口，则会使用JDK动态代理。所有该目标类型实现的接口都将被代理。 若该目标对象没有实现任何接口，则创建一个CGLIB代理。
+失效的原因：
+1. 内部调用
+一个切面方法和调用同一个类内的另一个切面方法，则第二个就不会生效
+可以通过 AopContext.currentProxy().method2() 来调用
+@Transactional  同样也有这个问题
+
+* 慢sql问题定位
+先查慢sql日志，找到相应的sql
+查看sql是否使用了索引，简单的就是通过看sql使用的字段和ddl，如果没有，就加上索引
+如果有，看一下explain 是否真正的使用过了索引。
+这仅仅是软件层面，还要看看是否是硬件不够了，配置项如连接数之类的。
+
+* mysql存储引擎的区别
+我们常用的就是 innodb，支持事务，存储结构使用的是B+tree
+ InnoDB是聚集索引，使用B+Tree作为索引结构，数据文件是和（主键）索引绑在一起的（表数据文件本身就是按B+Tree组织的一个索引结构），必须要有主键，通过主键索引效率很高。但是辅助索引需要两次查询，先查询到主键，然后再通过主键查询到数据。因此，主键不应该过大，因为主键太大，其他索引也都会很大。
+
+
+innodb支持表 和行锁，myisam 支持表锁
+InnoDB的行锁是实现在索引上的，而不是锁在物理行记录上。潜台词是，如果访问没有命中索引，也无法使用行锁，将要退化为表锁。
+
+InnoDB为什么推荐使用自增ID作为主键？
+自增ID可以保证每次插入时B+索引是从右边扩展的，可以避免B+树和频繁合并和分裂（对比使用UUID）。如果使用字符串主键和随机主键，会使得数据随机插入，效率比较差。
+
+InnoDB：
+1. 数据文件本身就是索引文件
+2. 表数据文件本身就是按B+Tree组织的一个索引结构文件
+3. 聚集索引中叶节点包含了完整的数据记录
+4. InnoDB表必须要有主键，并且推荐使用整型自增主键
+
+几种树的不同
+
+操作系统储存数据的最小单位是页（page），一页假设是4K大小（由操作系统决定）
+
+
+1.innodb支持事务、myisam不支持
+2.innodb支持表锁、行锁，myisam只支持表锁
+3.innodb聚簇索引的叶子结点保存了数据，myisam保存了数据的地址
+
+* ACID
+A:原子性
+指同一个事务里的操作要么同时成功、要么同时失败。
+C:一致性
+数据库的完整性和一致性，一个事务执行之前和执行之后数据库都处于一致性状态
+I:隔离性
+是指各个事务之间通过一定的隔离级别相互隔离，进行一个并发控制
+D:持久性
+是指事务提交后就会保存在磁盘里
+一旦事务提交，那么它对数据库中的对应数据的状态的变更就会永久保存到数据库中
+
+隔离级别，以及相应的问题：
+
+读未提交
+一个事务可以读取到另一个事务修改但是还没提交的数据
+存在的问题就是会脏读
+
+读已提交
+一个事务会读取另一个事务已经提交的数据。
+存在的问题是 不可重复读，前后两次读取的数据不相等
+
+可重复读
+是指在一个事务里可以重复读取数据，不受其他事务影响
+会存在幻读，select * from tb where id >10  insert tb id (11)可能会出错，因为11存在了
+
+解决方式是 加上 for update 这样就会加上间隙锁，
+
+串行化
+事务的查询会加共享锁，提交后才会释放。死锁的概率很高，所以也不长用。
+
+在可重复读的隔离级别下，要想避免幻读，可以用共享锁 lock in share mode 、或者for update锁住范围，这样就会加上间隙锁。
+
+
+* MVCC机制
+
+* B+树具体实现
+B+Tree 每个节点有多个Key和Data， 子节点不保存数据，只保存索引，
+
+* 千万数据在MYSQL的B+树上会存几层
+三层
+
+磁盘读取的单位是扇区大概是512Bytes，操作系统一次读取4kb，mysql一般一个节点大概是4kb
+假设一个索引是10Bytes，那么一节点大概就是400个索引，400*400*400 = 64000000 大概就是6千万数据
+一般根节点要常驻内存，所以只需要io两次就可以了
+
+
+
+* MYSQL有哪些日志？都有什么用
+redo log
+redo log包括两部分：一是内存中的日志缓冲(redo log buffer)，该部分日志是易失性的；二是磁盘上的重做日志文件(redo log file)，该部分日志是持久的。
+用来保证事务的持久性，指事务提交，服务器宕机，重启后会根据redo log 来恢复磁盘脏页
+redo log的刷盘：
+1. 每隔一秒会有一个刷盘动作
+2. 每个事务提交时会将重做日志刷新到重做日志文件
+3. 当重做日志缓存空间小于一半的时候，会刷新到缓存文件
+
+
+undo log
+Undo log是InnoDB MVCC事务特性的重要组成部分
+当rollback将数据恢复到原始之前类似于备份表,为了保证事务的原子性
+Innodb使用undo log实现mvcc,从undo log读取旧版本的数据
+
+bin log
+记录逻辑日志，sql和反向sql，用于主从复制
+刷盘策略：
+1. sync_binlog=0 每次事务提交都写到文件，文件的刷盘靠文件系统
+2. sync_binlog=N N次事务提交触发一次binlog写入文件系统并调用fdatasync()刷盘
+
+
+bin log 和 undo log、redo log的区别
+1. 处理层次不同，REDO/UNDO LOG由Innodb存储引擎处理，而BINLOG由MySQL 服务层处理
+2. 记录内容不同，REDO/UNDO LOG记录的数据页的修改情况，REDO LOG采用物理日志+逻辑日志的方式存储，UNDO LOG采用逻辑日志方式存储，用于保证数据一致性；而BINLOG日志记录的事务操作的内容，用于主从复制。
+3. 记录时机不同，REDO/UNDO LOG在事务的执行过程中不断生成和写入，而BINLOG在事务最终COMMIT前写入。
+
+慢查询日志
+
+
+
+* mysql执行流程
+https://blog.csdn.net/weixin_29477915/article/details/113199746
+mysql主要分为server和存储引擎层
+server层：连接器、查询缓存、分析器、优化器、执行器，还有一个日志模块binlog，这个日志模块所有的引擎都可以使用
+
+存储引擎层：innodb,myisam,memory
+
+查询执行过程：权限校验、查询缓存、分析器、优化器、权限校验、执行器、引擎
+更新执行过程：分析器、权限校验、执行器、引擎、redo log prepare、binlog、redo log commit
+
+
+
+
+
+
+
+
+
+* common-pool2
+配置：
+maxTotal: 对象池中最多允许的对象数，默认8
+maxIdle: 对象池中最多允许存在的空闲对象，默认8
+minIdle: 池中最少要保留的对象数，默认0
+lifo: 是否使用FIFO先进先出的模式获取对象（空闲对象都在一个队列中），默认为true使用先进先出，false是先进后出
+fairness: 是否使用公平锁，默认false(公平锁是线程安全中的概念，true的含义是谁先等待获取锁，随先在锁释放的时候获取锁，如非必要，一般不使用公平锁，会影响性能)
+maxWaitMillis：从池中获取一个对象最长的等待时间，默认-1，含义是无限等，超过这个时间还未获取空闲对象，就会抛出异常。
+minEvictableIdleTimeMillis：最小的驱逐时间，单位毫秒，默认30分钟。这个用于驱逐线程，对象空闲时间超过这个时间，意味着此时系统不忙碌，会减少对象数量。
+evictorShutdownTimeoutMillis：驱逐线程关闭的超时时间，默认10秒。
+softMinEvictableIdleTimeMillis：也是最小的驱逐时间，但是会和另一个指标minIdle一同使用，满足空闲时间超过这个设置，且当前空闲数量比设置的minIdle要大，会销毁该对象。所以，通常该值设置的比minEvictableIdleTimeMillis要小。
+numTestsPerEvictionRun: 驱逐线程运行每次测试的对象数量，默认3个。驱逐线程就是用来检查对象空闲状态，通过设置的对象数量等参数，保持对象的活跃度和数量，其是一个定时任务，每次不是检查所有的对象，而是抽查几个，这个就是用于抽查。
+evictionPolicyClassName: 驱逐线程使用的策略类名，之前的minEvictableIdleTimeMillis和softMinEvictableIdleTimeMillis就是默认策略DefaultEvictionPolicy的实现，可以自己实现策略。
+testOnCreate: 在创建对象的时候是否检测对象，默认false。后续会结合代码说明是如何检测的。
+testOnBorrow: 在获取空闲对象的时候是否检测对象是否有效，默认false。这个通常会设置成true，一般希望获取一个可用有效的对象吧。
+testOnReturn: 在使用完对象放回池中时是否检测对象是否仍有效，默认false。
+testWhileIdle: 在空闲的时候是否检测对象是否有效，这个发生在驱逐线程执行时。
+timeBetweenEvictionRunsMillis: 驱逐线程的执行周期，上面说过该线程是个定时任务。默认-1，即不开启驱逐线程，所以与之相关的参数是没有作用的。
+blockWhenExhausted: 在对象池耗尽时是否阻塞，默认true。false的话超时就没有作用了。
+
+
+TimeBetweenEvictionRunsMillis
+当TimeBetweenEvictionRunsMillis大于0时，会启动驱逐线程，定时执行驱逐。
+先是判断池是开启状态，且空闲对象要大于0，不然不需要驱逐，每次会尝试驱逐numTestsPerEvictionRun（默认3个）个对象，当任务执行后后会判断是否小于minIdel，小于则创建足够的对象，直到idel数量等于minIdel。根据DefaultEvictionPolicy来校验驱逐策略，如果是驱逐，调用destory销毁对象。否则，判断testWhileIdle配置项，决定是否校验对象是否可用，先激活对象activateObject，有问题则直接销毁。否则校验对象可用性validateObject，失败则销毁，成功就钝化变成原样子。
+
+
+
+common-pool2工作逻辑：
+
+我们首先要创建一个 GenericObjectPool 池，参数是池管理的对象的工厂对象（实现PooledObjectFactory接口）。池主要做对象的管理工作，借、还、检查有效性、创建新对象、销毁对象。池对象工厂用来实现池对象的生命周期方法，创建、销毁、校验、激活、钝化
+
+借对象：先去池里面从idle中获取一个，没有的话就创建一个，如果超过maxTotal，返回null，创建失败线程阻塞，等待时间如果是-1就一直等待，不是-1到指定时间还没等到就抛出异常，不等待会在没有获取到对象的时候直接抛出异常，获取后激活对象，失败就销毁，成功后判断borrow和create的时候校验可用性，失败则销毁。
+
+还对象：还的时候判断是否要校验可用性，如校验不可用则销毁，之后钝化对象，失败则销毁，超过maxIdle也直接销毁
+
+
+涉及销毁对象，所以都要进行确定minidle来决定是否补充对象。
+
+
+
+* 分布式事务解决方案
+https://xiaomi-info.github.io/2020/01/02/distributed-transaction/
+
+ACID 刚性事务
+
+分布式环境：柔性事务
+
+
+XA:两阶段提交
+
+TCC: try confirm cancel
+
+两阶段提交和TCC还是比较像的，但是两阶段提交会有一个事务管理器，而TCC是由主事务发起
+
+
+可靠消息最终一致性:
+
+尽最大努力通知:
+
+
+
+中间件：
+seata
+
+
+
+saga模式
+
+
+
+* 分布式锁
+
+基于redis 的分布式锁
+
+
+
+
+
+
+
+
+* 对象池 common pool2
+https://juejin.cn/post/6956383016469921822
+配置：
+maxTotal: 对象池中最多允许的对象数，默认8
+maxIdle: 对象池中最多允许存在的空闲对象，默认8
+minIdle: 池中最少要保留的对象数，默认0
+lifo: 是否使用FIFO先进先出的模式获取对象（空闲对象都在一个队列中），默认为true使用先进先出，false是先进后出
+fairness: 是否使用公平锁，默认false(公平锁是线程安全中的概念，true的含义是谁先等待获取锁，随先在锁释放的时候获取锁，如非必要，一般不使用公平锁，会影响性能)
+maxWaitMillis：从池中获取一个对象最长的等待时间，默认-1，含义是无限等，超过这个时间还未获取空闲对象，就会抛出异常。
+minEvictableIdleTimeMillis：最小的驱逐时间，单位毫秒，默认30分钟。这个用于驱逐线程，对象空闲时间超过这个时间，意味着此时系统不忙碌，会减少对象数量。
+evictorShutdownTimeoutMillis：驱逐线程关闭的超时时间，默认10秒。
+softMinEvictableIdleTimeMillis：也是最小的驱逐时间，但是会和另一个指标minIdle一同使用，满足空闲时间超过这个设置，且当前空闲数量比设置的minIdle要大，会销毁该对象。所以，通常该值设置的比minEvictableIdleTimeMillis要小。
+numTestsPerEvictionRun: 驱逐线程运行每次测试的对象数量，默认3个。驱逐线程就是用来检查对象空闲状态，通过设置的对象数量等参数，保持对象的活跃度和数量，其是一个定时任务，每次不是检查所有的对象，而是抽查几个，这个就是用于抽查。
+evictionPolicyClassName: 驱逐线程使用的策略类名，之前的minEvictableIdleTimeMillis和softMinEvictableIdleTimeMillis就是默认策略DefaultEvictionPolicy的实现，可以自己实现策略。
+testOnCreate: 在创建对象的时候是否检测对象，默认false。后续会结合代码说明是如何检测的。
+testOnBorrow: 在获取空闲对象的时候是否检测对象是否有效，默认false。这个通常会设置成true，一般希望获取一个可用有效的对象吧。
+testOnReturn: 在使用完对象放回池中时是否检测对象是否仍有效，默认false。
+testWhileIdle: 在空闲的时候是否检测对象是否有效，这个发生在驱逐线程执行时。
+timeBetweenEvictionRunsMillis: 驱逐线程的执行周期，上面说过该线程是个定时任务。默认-1，即不开启驱逐线程，所以与之相关的参数是没有作用的。
+blockWhenExhausted: 在对象池耗尽时是否阻塞，默认true。false的话超时就没有作用了。
+
+
+TimeBetweenEvictionRunsMillis
+当TimeBetweenEvictionRunsMillis大于0时，会启动驱逐线程，定时执行驱逐。
+先是判断池是开启状态，且空闲对象要大于0，不然不需要驱逐，每次会尝试驱逐numTestsPerEvictionRun（默认3个）个对象，当任务执行后后会判断是否小于minIdel，小于则创建足够的对象，直到idel数量等于minIdel。根据DefaultEvictionPolicy来校验驱逐策略，如果是驱逐，调用destory销毁对象。否则，判断testWhileIdle配置项，决定是否校验对象是否可用，先激活对象activateObject，有问题则直接销毁。否则校验对象可用性validateObject，失败则销毁，成功就钝化变成原样子。
+
+
+common-pool2工作逻辑：
+
+我们首先要创建一个 GenericObjectPool 池，参数是池管理的对象的工厂对象（实现PooledObjectFactory接口）。池主要做对象的管理工作，借、还、检查有效性、创建新对象、销毁对象。池对象工厂用来实现池对象的生命周期方法，创建、销毁、校验、激活、钝化
+
+借对象：先去池里面从idle中获取一个，没有的话就创建一个，如果超过maxTotal，返回null，创建失败线程阻塞，等待时间如果是-1就一直等待，不是-1到指定时间还没等到就抛出异常，不等待会在没有获取到对象的时候直接抛出异常，获取后激活对象，失败就销毁，成功后判断borrow和create的时候校验可用性，失败则销毁。
+
+还对象：还的时候判断是否要校验可用性，如校验不可用则销毁，之后钝化对象，失败则销毁，超过maxIdle也直接销毁
+
+涉及销毁对象，所以都要进行确定minidle来决定是否补充对象。
+
+
+
+
+* mysql查询死锁
+
+mysql磁盘慢了之后会导致锁库了
+
+查询数据库中表的状态，是否被锁
+
+SHOW FULL PROCESSLIST
+查询的是information_schema.processist;
+查询出来的id是线程id，可以通过 kill id 来杀掉线程
+
+information_schema.innodb_trx;
+information_schema.innodb_locks;
+
+查看正在锁的事务
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS; 
+查看等待锁的事务
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
+
+
